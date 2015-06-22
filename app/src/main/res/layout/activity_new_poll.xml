@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.balabh.pollrise.activity.NewPollActivity">
+    <include android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/toolbar"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:gravity="center_vertical">
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/textColorDark"
+            android:id="@+id/question"
+            android:hint="@string/your_question"
+            android:textSize="24sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/choices"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/textColorHeaders"
+                android:paddingBottom="5dp"
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:id="@+id/choices">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColorDark"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:hint="Choice"
+                    android:textSize="16sp"
+                    android:editable="true"
+                    android:drawableBottom="@drawable/divider"/>
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/textColorDark"
+                    android:paddingBottom="10dp"
+                    android:hint="Choice"
+                    android:textSize="16sp"
+                    android:editable="true" />
+            </LinearLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Add Choice +"
+                android:id="@+id/add_choice"
+                android:layout_gravity="center_horizontal"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/textColorPrimary"
+                android:clickable="true"
+                android:enabled="false" />
+
+        </LinearLayout>
+
+        <!--TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_image"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            android:textColor="@color/textColorHeaders"
+            /-->
+
+
+    </LinearLayout>
+
+</RelativeLayout>
