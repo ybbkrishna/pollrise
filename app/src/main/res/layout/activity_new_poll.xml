@@ -38,24 +38,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:id="@+id/choices">
+                android:id="@+id/action_choices">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColorDark"
-                    android:paddingTop="10dp"
-                    android:paddingBottom="10dp"
+                    android:singleLine="true"
+                    android:paddingTop="@dimen/activity_choice_padding"
+                    android:paddingBottom="@dimen/activity_choice_padding"
                     android:hint="Choice"
-                    android:textSize="16sp"
-                    android:editable="true"
-                    android:drawableBottom="@drawable/divider"/>
+                    android:textSize="@dimen/activity_choice_text_size"
+                    android:editable="true"/>
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/textColorDark"
-                    android:paddingBottom="10dp"
+                    android:singleLine="true"
+                    android:paddingBottom="@dimen/activity_choice_padding"
                     android:hint="Choice"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/activity_choice_text_size"
                     android:editable="true" />
             </LinearLayout>
 
@@ -63,12 +64,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Add Choice +"
-                android:id="@+id/add_choice"
+                android:id="@+id/action_add_choice"
                 android:layout_gravity="center_horizontal"
                 android:background="@color/colorPrimary"
                 android:textColor="@color/textColorPrimary"
                 android:clickable="true"
-                android:enabled="false" />
+                android:enabled="true"
+                android:onClick="onClick"/>
 
         </LinearLayout>
 

@@ -7,9 +7,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatCallback;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.example.balabh.pollrise.R;
 
@@ -18,6 +23,7 @@ public class NewPollActivity extends Activity implements AppCompatCallback {
 
     private Toolbar mToolbar;
     private AppCompatDelegate delegate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +56,28 @@ public class NewPollActivity extends Activity implements AppCompatCallback {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.action_add_choice :
+                LinearLayout l = (LinearLayout)findViewById(R.id.action_choices);
+                EditText e = new EditText(NewPollActivity.this);
+                e.setHint("Choice");
+                e.setPadding(0, 0, 0, R.dimen.activity_choice_padding);
+                e.setTextSize(R.dimen.activity_choice_text_size);
+                //e.setTextColor(getResources().getColor(R.color.textColorDark));
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                        LinearLayout.LayoutParams.MATCH_PARENT,
+                        LinearLayout.LayoutParams.WRAP_CONTENT);
+                //params.bottomMargin = 100;
+                e.setLayoutParams(params);
+                e.setSingleLine(true);
+                l.addView(e);
+                break;
+            default:
+                return;
+        }
     }
 
     @Override
