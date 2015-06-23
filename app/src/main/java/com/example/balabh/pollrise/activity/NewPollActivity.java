@@ -14,7 +14,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.example.balabh.pollrise.R;
 
@@ -34,6 +36,7 @@ public class NewPollActivity extends Activity implements AppCompatCallback {
         mToolbar = (Toolbar)findViewById(R.id.toolbar);
         delegate.setSupportActionBar(mToolbar);
         delegate.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        delegate.getSupportActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
@@ -49,18 +52,22 @@ public class NewPollActivity extends Activity implements AppCompatCallback {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_settings :
+                return true;
+            case R.id.action_addpoll :
+                Toast.makeText(NewPollActivity.this, "Adding new poll",Toast.LENGTH_SHORT).show();
+                return true;
+            case android.R.id.home :
+                onBackPressed();
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.action_add_choice :
+            /*case R.id.action_add_choice :
                 LinearLayout l = (LinearLayout)findViewById(R.id.action_choices);
                 EditText e = new EditText(NewPollActivity.this);
                 e.setHint("Choice");
@@ -74,7 +81,7 @@ public class NewPollActivity extends Activity implements AppCompatCallback {
                 e.setLayoutParams(params);
                 e.setSingleLine(true);
                 l.addView(e);
-                break;
+                break;*/
             default:
                 return;
         }
