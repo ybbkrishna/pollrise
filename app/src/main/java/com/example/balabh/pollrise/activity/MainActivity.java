@@ -8,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatCallback;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +25,9 @@ public class MainActivity extends Activity implements AppCompatCallback {
     private Toolbar mToolbar;
     private AppCompatDelegate delegate;
     private ImageButton FAB;
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,12 @@ public class MainActivity extends Activity implements AppCompatCallback {
                 startActivity(i);
             }
         });
+        mRecyclerView = (RecyclerView)findViewById(R.id.polls_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        /*mAdapter = new MyAdapter(myDataset);
+        mRecyclerView.setAdapter(mAdapter);*/
     }
 
     @Override

@@ -12,7 +12,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:id="@+id/frameLayout">
-        <TextView
+        <!--<TextView
             android:id="@+id/TextAct1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +21,12 @@
             android:layout_centerVertical="true"
             android:layout_gravity="center"
             android:text="This is the first Activity, Say Hi"
-            android:textSize="25sp" />
+            android:textSize="25sp" />-->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/polls_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical" />
 
         <ImageButton
             android:layout_margin="15dp"
@@ -30,6 +35,7 @@
             android:src="@drawable/ic_action_add"
             android:background="@drawable/circle"
             android:id="@+id/addPoll"
-            android:layout_gravity="right|bottom" />
+            android:layout_gravity="right|bottom"
+            android:elevation="2dp"/>
     </FrameLayout>
 </RelativeLayout>
