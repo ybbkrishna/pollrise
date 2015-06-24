@@ -18,6 +18,13 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.balabh.pollrise.R;
+import com.example.balabh.pollrise.adapter.PollViewAdapter;
+import com.example.balabh.pollrise.model.Poll;
+import com.example.balabh.pollrise.model.PollOption;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 
 public class MainActivity extends Activity implements AppCompatCallback {
@@ -51,8 +58,8 @@ public class MainActivity extends Activity implements AppCompatCallback {
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        /*mAdapter = new MyAdapter(myDataset);
-        mRecyclerView.setAdapter(mAdapter);*/
+        mAdapter = new PollViewAdapter(getPolls());
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -100,5 +107,34 @@ public class MainActivity extends Activity implements AppCompatCallback {
     @Override
     public ActionMode onWindowStartingSupportActionMode(ActionMode.Callback callback) {
         return null;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ((PollViewAdapter)mAdapter).setClickListener(new
+            PollViewAdapter.ClickListener() {
+                @Override
+                public void onClick(int position, View v) {
+                    Toast.makeText(MainActivity.this, "item clicked", Toast.LENGTH_SHORT).show();
+                }
+            });
+    }
+
+    private List<Poll> getPolls() {
+        String[] questions = new String[] {"Your favourite cricket player."
+                , "your favourite Cuisine.", "which is the best place to visit."};
+        String[] options = new String[] {"Sachin", "Dravid", "Dhoni", "Kohli", "Andhra", "Italian"
+                , "Mexican", "Chinese", "Vietnam", "United States", "India", "Japan"};
+        List<Poll> polls = new ArrayList<Poll>();
+        for (int i=0;i<20; i++) {
+            Poll poll = new Poll(questions[(int)(Math.random()*questions.length)], new Date());
+            for(int j=0;j<4;j++) {
+                PollOption option = new PollOption(options[(int)(Math.random()*options.length)]);
+                poll.addOption(option);
+            }
+            polls.add(poll);
+        }
+        return polls;
     }
 }

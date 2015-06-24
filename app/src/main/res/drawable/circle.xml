@@ -2,7 +2,7 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
      
         
-    <item android:top="8px">
+    <!--<item android:top="8px">
                 
         <layer-list>
             <item>           
@@ -126,7 +126,7 @@
                     
         </layer-list>
             
-    </item>
+    </item>-->
      
         
     <item>

@@ -9,8 +9,6 @@ import android.widget.TextView;
 import com.example.balabh.pollrise.R;
 import com.example.balabh.pollrise.model.Poll;
 
-import java.net.InterfaceAddress;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -37,7 +35,7 @@ public class PollViewAdapter extends RecyclerView.Adapter<PollViewAdapter.ViewHo
         }
     }
 
-    public static void setClickListener(ClickListener clickListener) {
+    public void setClickListener(ClickListener clickListener) {
         PollViewAdapter.clickListener = clickListener;
     }
 
