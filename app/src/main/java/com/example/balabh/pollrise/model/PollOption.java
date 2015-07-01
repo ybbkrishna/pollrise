@@ -29,7 +29,7 @@ public class PollOption {
         return count;
     }
 
-    public void incrementCount(int count) {
+    public void incrementCount() {
         this.count++;
     }
 

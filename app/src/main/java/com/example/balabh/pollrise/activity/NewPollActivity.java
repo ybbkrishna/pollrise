@@ -16,9 +16,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.balabh.pollrise.R;
+import com.example.balabh.pollrise.model.Poll;
+import com.example.balabh.pollrise.model.PollOption;
+import com.example.balabh.pollrise.service.DataStoreService;
+
+import java.util.Date;
 
 
 public class NewPollActivity extends Activity implements AppCompatCallback {
@@ -56,8 +62,15 @@ public class NewPollActivity extends Activity implements AppCompatCallback {
             case R.id.action_settings :
                 return true;
             case R.id.action_addpoll :
-                Toast.makeText(NewPollActivity.this, "Adding new poll",Toast.LENGTH_SHORT).show();
-                return true;
+                Poll poll = new Poll((String)((TextView)findViewById(R.id.question)).getText(), new Date());
+                LinearLayout choices = (LinearLayout) findViewById(R.id.action_choices);
+                for (int i=0; i<choices.getChildCount();i++) {
+                    EditText et = (EditText)choices.getChildAt(i);
+                    PollOption pollOption = new PollOption(et.getText().toString());
+                    poll.addOption(pollOption);
+                }
+                DataStoreService.getDataStore().addPole(poll);
+                Toast.makeText(NewPollActivity.this, "Added new poll", Toast.LENGTH_SHORT).show();
             case android.R.id.home :
                 onBackPressed();
                 return true;

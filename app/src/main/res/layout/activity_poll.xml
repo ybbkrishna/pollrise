@@ -4,6 +4,7 @@
     tools:context="com.example.balabh.pollrise.activity.PollActivity">
 
     <include android:id="@+id/toolbar" layout="@layout/toolbar"/>
+<!--
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -12,23 +13,95 @@
         android:paddingLeft="16dp"
         android:paddingRight="16dp"
         android:id="@+id/linearLayout">
+        &lt;!&ndash;&ndash;&gt;
+-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/textColorDark"
-            android:paddingBottom="10dp"
+            android:layout_below="@id/toolbar"
+            android:paddingTop="10dp"
+            android:paddingBottom="15dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
             android:id="@+id/question"
-            android:hint="@string/your_question"
+            android:hint="@string/question"
             android:textSize="24sp"/>
-        <LinearLayout
+        <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_below="@id/question"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            android:alignmentMode="alignBounds"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp">
+            <TextView
+                android:textColor="@color/textColorDark"
+                android:paddingBottom="@dimen/activity_choice_padding"
+                android:hint="Choice"
+                android:id="@+id/choice1"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="@dimen/activity_choice_text_size"
+                android:layout_gravity="fill|center"
+                android:gravity="center"
+                android:clickable="true"
+                android:background="@drawable/poll_option_bg"
+                android:onClick="onClick"/>
+            <TextView
+                android:textColor="@color/textColorDark"
+                android:paddingBottom="@dimen/activity_choice_padding"
+                android:id="@+id/choice2"
+                android:hint="Choice"
+                android:gravity="center"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:textSize="@dimen/activity_choice_text_size"
+                android:layout_gravity="fill|center"
+                android:background="@drawable/poll_option_bg"
+                android:onClick="onClick"
+                android:clickable="true"/>
+            <TextView
+                android:textColor="@color/textColorDark"
+                android:paddingBottom="@dimen/activity_choice_padding"
+                android:hint="Choice"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:id="@+id/choice3"
+                android:gravity="center"
+                android:textSize="@dimen/activity_choice_text_size"
+                android:layout_gravity="fill|center"
+                android:background="@drawable/poll_option_bg"
+                android:onClick="onClick"
+                android:clickable="true"/>
+            <TextView
+                android:textColor="@color/textColorDark"
+                android:paddingBottom="@dimen/activity_choice_padding"
+                android:hint="Choice"
+                android:layout_columnWeight="1"
+                android:layout_rowWeight="1"
+                android:id="@+id/choice4"
+                android:gravity="center"
+                android:textSize="@dimen/activity_choice_text_size"
+                android:layout_gravity="fill|center"
+                android:background="@drawable/poll_option_bg"
+                android:onClick="onClick"
+                android:clickable="true"/>
+        </GridLayout>
+
+        <!--<LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:orientation="vertical"
+            android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground">
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <TextView
@@ -37,22 +110,28 @@
                     android:textColor="@color/textColorDark"
                     android:paddingBottom="@dimen/activity_choice_padding"
                     android:hint="Choice"
+                    android:id="@+id/choice1"
                     android:textSize="@dimen/activity_choice_text_size"
                     android:layout_weight="1"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:onClick="onClick"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textColor="@color/textColorDark"
                     android:paddingBottom="@dimen/activity_choice_padding"
+                    android:id="@+id/choice2"
                     android:hint="Choice"
                     android:textSize="@dimen/activity_choice_text_size"
                     android:layout_weight="1"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:onClick="onClick"/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
                 <TextView
@@ -61,19 +140,25 @@
                     android:textColor="@color/textColorDark"
                     android:paddingBottom="@dimen/activity_choice_padding"
                     android:hint="Choice"
+                    android:id="@+id/choice3"
                     android:textSize="@dimen/activity_choice_text_size"
                     android:layout_weight="1"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:onClick="onClick"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:textColor="@color/textColorDark"
                     android:paddingBottom="@dimen/activity_choice_padding"
                     android:hint="Choice"
+                    android:id="@+id/choice4"
                     android:textSize="@dimen/activity_choice_text_size"
                     android:layout_weight="1"
-                    android:gravity="center"/>
+                    android:gravity="center"
+                    android:clickable="true"
+                    android:onClick="onClick"/>
             </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
+        </LinearLayout>-->
+    <!--</LinearLayout>-->
 </RelativeLayout>

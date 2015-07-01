@@ -21,6 +21,7 @@ import com.example.balabh.pollrise.R;
 import com.example.balabh.pollrise.adapter.PollViewAdapter;
 import com.example.balabh.pollrise.model.Poll;
 import com.example.balabh.pollrise.model.PollOption;
+import com.example.balabh.pollrise.service.DataStoreService;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -116,25 +117,15 @@ public class MainActivity extends Activity implements AppCompatCallback {
             PollViewAdapter.ClickListener() {
                 @Override
                 public void onClick(int position, View v) {
-                    Toast.makeText(MainActivity.this, "item clicked", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(getApplicationContext(), PollActivity.class);
+                    i.putExtra("selected_index", position);
+                    startActivity(i);
+                    //Toast.makeText(MainActivity.this, "item clicked", Toast.LENGTH_SHORT).show();
                 }
             });
     }
 
     private List<Poll> getPolls() {
-        String[] questions = new String[] {"Your favourite cricket player."
-                , "your favourite Cuisine.", "which is the best place to visit."};
-        String[] options = new String[] {"Sachin", "Dravid", "Dhoni", "Kohli", "Andhra", "Italian"
-                , "Mexican", "Chinese", "Vietnam", "United States", "India", "Japan"};
-        List<Poll> polls = new ArrayList<Poll>();
-        for (int i=0;i<20; i++) {
-            Poll poll = new Poll(questions[(int)(Math.random()*questions.length)], new Date());
-            for(int j=0;j<4;j++) {
-                PollOption option = new PollOption(options[(int)(Math.random()*options.length)]);
-                poll.addOption(option);
-            }
-            polls.add(poll);
-        }
-        return polls;
+        return DataStoreService.getDataStore().getAllPoles();
     }
 }

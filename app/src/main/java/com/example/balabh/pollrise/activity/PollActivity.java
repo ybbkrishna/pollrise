@@ -10,13 +10,22 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.GridLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.balabh.pollrise.R;
+import com.example.balabh.pollrise.model.Poll;
+import com.example.balabh.pollrise.service.DataStoreService;
 
 public class PollActivity extends Activity implements AppCompatCallback {
 
     private AppCompatDelegate mDelegate;
     private Toolbar mToolbar;
+    private Poll poll;
+    private int selection = -1;
+    private View previousView = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +36,18 @@ public class PollActivity extends Activity implements AppCompatCallback {
         mDelegate.setSupportActionBar(mToolbar);
         mDelegate.getSupportActionBar().setHomeButtonEnabled(true);
         mDelegate.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
+        int index = getIntent().getIntExtra("selected_index", 0);
+        poll = DataStoreService.getDataStore().getPoll(index);
+        TextView question = (TextView) findViewById(R.id.question);
+        question.setText(poll.getQuestion());
+        TextView choice1 = (TextView) findViewById(R.id.choice1);
+        choice1.setText(poll.getOptions().get(0).getLabel());
+        TextView choice2 = (TextView) findViewById(R.id.choice2);
+        choice2.setText(poll.getOptions().get(1).getLabel());
+        TextView choice3 = (TextView) findViewById(R.id.choice3);
+        choice3.setText(poll.getOptions().get(2).getLabel());
+        TextView choice4 = (TextView) findViewById(R.id.choice4);
+        choice4.setText(poll.getOptions().get(3).getLabel());
     }
 
     @Override
@@ -43,12 +63,20 @@ public class PollActivity extends Activity implements AppCompatCallback {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_settings :
+                return true;
+            case R.id.action_submit:
+                if(selection == -1) {
+                    Toast.makeText(PollActivity.this, "Please select an option",
+                            Toast.LENGTH_SHORT).show();
+                    return true;
+                }
+                poll.getOptions().get(selection).incrementCount();
+            case android.R.id.home :
+                onBackPressed();
+                return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -66,5 +94,32 @@ public class PollActivity extends Activity implements AppCompatCallback {
     @Override
     public ActionMode onWindowStartingSupportActionMode(ActionMode.Callback callback) {
         return null;
+    }
+
+    public void onClick(View view) {
+        if(!(view instanceof TextView)) {
+            return;
+        }
+        if(selection!=-1) {
+            previousView.setActivated(false);
+        }
+        switch (view.getId()) {
+            case R.id.choice1:
+                selection=0;
+                break;
+            case R.id.choice2:
+                selection=1;
+                break;
+            case R.id.choice3:
+                selection=2;
+                break;
+            case R.id.choice4:
+                selection=3;
+                break;
+        }
+        previousView = view;
+        view.setActivated(true);
+        /*view.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+        ((TextView) view).setTextColor(getResources().getColor(R.color.textColorPrimary));*/
     }
 }

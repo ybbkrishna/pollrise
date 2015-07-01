@@ -30,5 +30,8 @@
     <string name="choices">Choices</string>
     <string name="add_image">Image</string>
     <string name="action_addpoll">Add poll</string>
-    <string name="title_activity_poll">PollActivity</string>
+
+    <string name="title_activity_poll"></string>
+    <string name="action_submit">Submit</string>
+    <string name="question">Question</string>
 </resources>
