@@ -10,7 +10,10 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewAnimationUtils;
+import android.view.ViewGroup;
 import android.widget.GridLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,7 +22,7 @@ import com.example.balabh.pollrise.R;
 import com.example.balabh.pollrise.model.Poll;
 import com.example.balabh.pollrise.service.DataStoreService;
 
-public class PollActivity extends Activity implements AppCompatCallback {
+public class PollActivity extends Activity implements View.OnTouchListener, AppCompatCallback {
 
     private AppCompatDelegate mDelegate;
     private Toolbar mToolbar;
@@ -40,14 +43,11 @@ public class PollActivity extends Activity implements AppCompatCallback {
         poll = DataStoreService.getDataStore().getPoll(index);
         TextView question = (TextView) findViewById(R.id.question);
         question.setText(poll.getQuestion());
-        TextView choice1 = (TextView) findViewById(R.id.choice1);
-        choice1.setText(poll.getOptions().get(0).getLabel());
-        TextView choice2 = (TextView) findViewById(R.id.choice2);
-        choice2.setText(poll.getOptions().get(1).getLabel());
-        TextView choice3 = (TextView) findViewById(R.id.choice3);
-        choice3.setText(poll.getOptions().get(2).getLabel());
-        TextView choice4 = (TextView) findViewById(R.id.choice4);
-        choice4.setText(poll.getOptions().get(3).getLabel());
+        ViewGroup holder = (ViewGroup) findViewById(R.id.holder);
+        for (int i=0; i<holder.getChildCount(); i++) {
+            holder.getChildAt(i).setOnTouchListener(this);
+            ((TextView)holder.getChildAt(i)).setText(poll.getOptions().get(i).getLabel());
+        }
     }
 
     @Override
@@ -96,12 +96,12 @@ public class PollActivity extends Activity implements AppCompatCallback {
         return null;
     }
 
-    public void onClick(View view) {
-        if(!(view instanceof TextView)) {
+    private void setSelection(View view, boolean reveal, int startX, int startY) {
+        if (view == previousView)
             return;
-        }
         if(selection!=-1) {
             previousView.setActivated(false);
+            ((TextView) previousView).setTextColor(getResources().getColor(R.color.textColorDark));
         }
         switch (view.getId()) {
             case R.id.choice1:
@@ -117,9 +117,33 @@ public class PollActivity extends Activity implements AppCompatCallback {
                 selection=3;
                 break;
         }
+        if(reveal)
+            ViewAnimationUtils.createCircularReveal(view,
+                    startX,
+                    startY,
+                    0,
+                    view.getHeight()).start();
         previousView = view;
-        view.setActivated(true);
+        ((TextView) view).setTextColor(getResources().getColor(R.color.textColorPrimary));
+    }
+
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        if(!(view instanceof TextView)) {
+            return false;
+        }
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                view.getBackground().setHotspot(motionEvent.getX(), motionEvent.getY());
+                break;
+            case MotionEvent.ACTION_UP:
+                view.setActivated(true);
+                setSelection(view, true, (int) motionEvent.getX(), (int) motionEvent.getY());
+                break;
+
+        }
+        //setSelection(view, true, (int) motionEvent.getX(), (int) motionEvent.getY());
         /*view.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
         ((TextView) view).setTextColor(getResources().getColor(R.color.textColorPrimary));*/
+        return false;
     }
 }

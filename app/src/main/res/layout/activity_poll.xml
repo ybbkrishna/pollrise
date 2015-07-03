@@ -32,6 +32,7 @@
             android:layout_height="match_parent"
             android:layout_below="@id/question"
             android:columnCount="2"
+            android:id="@+id/holder"
             android:rowCount="2"
             android:foreground="?android:attr/selectableItemBackground"
             android:clickable="true"
@@ -50,8 +51,7 @@
                 android:layout_gravity="fill|center"
                 android:gravity="center"
                 android:clickable="true"
-                android:background="@drawable/poll_option_bg"
-                android:onClick="onClick"/>
+                android:background="@drawable/poll_option_bg"/>
             <TextView
                 android:textColor="@color/textColorDark"
                 android:paddingBottom="@dimen/activity_choice_padding"
@@ -63,7 +63,6 @@
                 android:textSize="@dimen/activity_choice_text_size"
                 android:layout_gravity="fill|center"
                 android:background="@drawable/poll_option_bg"
-                android:onClick="onClick"
                 android:clickable="true"/>
             <TextView
                 android:textColor="@color/textColorDark"
@@ -76,7 +75,6 @@
                 android:textSize="@dimen/activity_choice_text_size"
                 android:layout_gravity="fill|center"
                 android:background="@drawable/poll_option_bg"
-                android:onClick="onClick"
                 android:clickable="true"/>
             <TextView
                 android:textColor="@color/textColorDark"
@@ -89,7 +87,6 @@
                 android:textSize="@dimen/activity_choice_text_size"
                 android:layout_gravity="fill|center"
                 android:background="@drawable/poll_option_bg"
-                android:onClick="onClick"
                 android:clickable="true"/>
         </GridLayout>
 
